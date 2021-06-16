@@ -2,7 +2,7 @@ import asyncio
 import discord
 import atexit
 import os
-TOKEN = "ODU0NzYyNzU5NjA2NjMyNDY4.YMop2g.CR22WBeccN0ZN7AOp95osy2cjlk"
+TOKEN = os.environ['PBT']
 client = discord.Client()
 command_prefix = "!g "
 
