@@ -1,5 +1,4 @@
-# This bot was a commission. 
-## It is not intended for public use.
+# This bot was a commission. It is not intended for public use.
 
 The Pissbot offers the must realistic discord based bladder simulation available to date.
 It offers a realistic drinking and pissing experience complete with bladder overflow
