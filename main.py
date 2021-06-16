@@ -88,7 +88,7 @@ async def handle_piss_at_cmd(message, params):
     if person.bladder_amount_current >= person.bladder_amount_max * 0.5:
         person.piss()
         if is_mention(params[1]) and params[1] != "<@" + str(person.discord_id) + ">":
-            await message.channel.send("<@" + str(person.discord_id) + "> just pissed at you," + params[1].lstrip(" ").rstrip(" "))
+            await message.channel.send("<@" + str(person.discord_id) + "> just pissed on you," + params[1].lstrip(" ").rstrip(" "))
         else:
             await message.channel.send("<@" + str(person.discord_id) + "> just pissed themself")
     else:
