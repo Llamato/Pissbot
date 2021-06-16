@@ -10,7 +10,7 @@ command_prefix = "!g "
 class User:
     def __init__(self, discord_id):
         self.discord_id = discord_id
-        self.bladder_amount_max = 10
+        self.bladder_amount_max = 5
         self.bladder_amount_current = 0
         self.holding_time_max = 300
         self.holding_time_current = 0
@@ -44,7 +44,7 @@ People = {}
 
 
 def is_mention(mention):
-    return mention.startswith("<@!") and mention.endswith(">") and mention[3:len(mention) - 1].isnumeric()
+    return mention.startswith("<@") and mention.endswith(">") and mention[3:len(mention) - 1].isnumeric()
 
 
 async def handle_overflow(channel, person):
@@ -65,7 +65,7 @@ async def handle_drink_cmd(message, params):
         person = People[message.author.id]
         amount = float(params[1])
         person.drink(amount)
-        await message.channel.send("You drunk " + str(amount) + "ml of water")
+        await message.channel.send("You drank " + str(amount) + "ml of water")
         if person.bladder_amount_current > person.bladder_amount_max:
             await handle_overflow(message.channel, person)
         else:
@@ -87,8 +87,9 @@ async def handle_piss_at_cmd(message, params):
     person = People[message.author.id]
     if person.bladder_amount_current >= person.bladder_amount_max * 0.5:
         person.piss()
+        print(params[1])
         if is_mention(params[1]) and params[1] != "<@" + str(person.discord_id) + ">":
-            await message.channel.send("<@" + str(person.discord_id) + "> just pissed on you," + params[1].lstrip(" ").rstrip(" "))
+            await message.channel.send("<@" + str(person.discord_id) + "> just pissed on you, " + params[1].lstrip(" ").rstrip(" "))
         else:
             await message.channel.send("<@" + str(person.discord_id) + "> just pissed themself")
     else:
