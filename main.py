@@ -120,7 +120,7 @@ async def on_message(message):
 @client.event
 async def on_ready():
     if os.path.exists("Saves/"):
-        save_files = os.listdir()
+        save_files = os.listdir("Saves/")
         for save_file in save_files:
             People[save_file[:4]] = User(save_file[:4])
     else:
