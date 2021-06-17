@@ -16,7 +16,7 @@ class User:
         self.holding_time_current = 0
 
     def load_from_disk(self):
-        file_handle = open("Saves/" + self.discord_id + ".txt", "r")
+        file_handle = open("Saves/" + str(self.discord_id) + ".txt", "r")
         self.bladder_amount_max = float(file_handle.readline())
         self.bladder_amount_current = float(file_handle.readline())
         self.holding_time_max = float(file_handle.readline())
@@ -24,8 +24,10 @@ class User:
         file_handle.close()
 
     def save_to_disk(self):
-        file_handle = open("Saves/" + self.discord_id + ".txt", "w")
+        file_handle = open("Saves/" + str(self.discord_id) + ".txt", "w")
         data = [str(self.bladder_amount_max), str(self.bladder_amount_current), str(self.holding_time_max), str(self.holding_time_current)]
+        for i in range(0, len(data)):
+            data[i] += "\n"
         file_handle.writelines(data)
         file_handle.close()
 
