@@ -125,7 +125,7 @@ async def on_ready():
         save_files = os.listdir("Saves/")
         for save_file in save_files:
             if not save_file.startswith(".") and save_file.endswith(".txt"):
-                user_id = save_file[:4]
+                user_id = save_file[0:len(save_file) - 4]
                 print("Loading data for user", user_id)
                 person = User(user_id)
                 person.load_from_disk()
