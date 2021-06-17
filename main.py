@@ -26,9 +26,10 @@ class User:
     def save_to_disk(self):
         file_handle = open("Saves/" + str(self.discord_id) + ".txt", "w")
         data = [str(self.bladder_amount_max), str(self.bladder_amount_current), str(self.holding_time_max), str(self.holding_time_current)]
-        for i in range(0, len(data)):
-            data[i] += "\n"
-        file_handle.writelines(data)
+        file_handle.write(str(self.bladder_amount_max) + "\n")
+        file_handle.write(str(self.bladder_amount_current) + "\n")
+        file_handle.write(str(self.holding_time_current) + "\n")
+        file_handle.write(str(self.bladder_amount_max) + "\n")
         file_handle.close()
 
     def drink(self, amount):
