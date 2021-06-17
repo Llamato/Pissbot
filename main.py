@@ -58,7 +58,7 @@ async def handle_overflow(channel, person):
 async def swell_bladder(channel, person):
     while person.bladder_amount_current > 0:
         await asyncio.sleep(1)
-        person.holding_time_current += 1
+        person.holding_time_current = int(person.holding_time_current) + 1
         if person.holding_time_current > person.holding_time_max and person.bladder_amount_current > 0:
             await handle_overflow(channel, person)
 
@@ -121,22 +121,26 @@ async def on_message(message):
 @client.event
 async def on_ready():
     if os.path.exists("Saves/"):
+        print("Loading save files...")
         save_files = os.listdir("Saves/")
         for save_file in save_files:
             People[save_file[:4]] = User(save_file[:4])
+        print("Loaded save files")
     else:
+        print("First time run? Creating Saves directory...")
         os.makedirs("Saves")
+        print("Saves directory created")
     print("Pissbot Online!")
 
 
 def exit_handler():
-    print("Stopping Pissbot")
+    print("Stopping Pissbot...")
     client.loop.stop()
     for person in People.values():
         person.save_to_disk()
     print("Pissbot stopped")
 
 
-print("Starting Pissbot")
+print("Starting Pissbot...")
 atexit.register(exit_handler)
 client.run(TOKEN)
