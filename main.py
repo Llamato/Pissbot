@@ -126,7 +126,9 @@ async def on_ready():
         for save_file in save_files:
             user_id = save_file[:4]
             print("Loading data for user", user_id)
-            People[user_id] = User(user_id)
+            person = User(user_id)
+            person.load_from_disk()
+            People[user_id] = person
         print("Loaded save files")
     else:
         print("First time run? Creating Saves directory...")
