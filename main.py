@@ -117,16 +117,19 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-    save_files = os.listdir()
-    for save_file in save_files:
-        People[save_file[:4]] = User(save_file[:4])
+    if os.path.exists("Saves/"):
+        save_files = os.listdir()
+        for save_file in save_files:
+            People[save_file[:4]] = User(save_file[:4])
+    else:
+        os.makedirs("Saves")
     print("Pissbot Online!")
 
 
 def exit_handler():
     print("Stopping Pissbot")
     client.loop.stop()
-    for person in People:
+    for person in People.values():
         person.save_to_disk()
     print("Pissbot stopped")
 
