@@ -124,7 +124,7 @@ async def on_ready():
         print("Loading save files...")
         save_files = os.listdir("Saves/")
         for save_file in save_files:
-            if save_file.endswith(".txt"):
+            if not save_file.startswith(".") and save_file.endswith(".txt"):
                 user_id = save_file[:4]
                 print("Loading data for user", user_id)
                 person = User(user_id)
