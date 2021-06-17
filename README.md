@@ -11,3 +11,5 @@ It offers a realistic drinking and pissing experience complete with bladder over
 | !g piss @target | you piss on the target user. The target will be notified and your bladder empties.|
 
 # Why did I do this? Why!!!!!!!!
+
+you can invite the bot by clicking on this link: https://discord.com/oauth2/authorize?client_id=854762759606632468&permissions=6144&scope=bot
