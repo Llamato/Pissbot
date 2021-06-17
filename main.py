@@ -28,8 +28,8 @@ class User:
         data = [str(self.bladder_amount_max), str(self.bladder_amount_current), str(self.holding_time_max), str(self.holding_time_current)]
         file_handle.write(str(self.bladder_amount_max) + "\n")
         file_handle.write(str(self.bladder_amount_current) + "\n")
+        file_handle.write(str(self.holding_time_max) + "\n")
         file_handle.write(str(self.holding_time_current) + "\n")
-        file_handle.write(str(self.bladder_amount_max) + "\n")
         file_handle.close()
 
     def drink(self, amount):
