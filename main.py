@@ -72,7 +72,7 @@ async def handle_drink_cmd(message, params):
             await handle_overflow(message.channel, person)
         else:
             client.loop.create_task(swell_bladder(message.channel, person))
-    except (IndexError, TypeError):
+    except (IndexError, TypeError, ValueError):
         await message.channel.send("Please use like this \n > drink [amount in ml]")
 
 
