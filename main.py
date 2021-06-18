@@ -25,7 +25,6 @@ class User:
 
     def save_to_disk(self):
         file_handle = open("Saves/" + str(self.discord_id) + ".txt", "w")
-        data = [str(self.bladder_amount_max), str(self.bladder_amount_current), str(self.holding_time_max), str(self.holding_time_current)]
         file_handle.write(str(self.bladder_amount_max) + "\n")
         file_handle.write(str(self.bladder_amount_current) + "\n")
         file_handle.write(str(self.holding_time_max) + "\n")
@@ -66,7 +65,7 @@ async def swell_bladder(channel, person):
 async def handle_drink_cmd(message, params):
     try:
         person = People[message.author.id]
-        amount = float(params[1])
+        amount = float(params[1].rstrip("ml"))
         person.drink(amount)
         await message.channel.send("You drank " + str(amount) + "ml of water")
         if person.bladder_amount_current > person.bladder_amount_max:
@@ -120,6 +119,10 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+    print("Pissbot Online!")
+
+
+def init_handler():
     if os.path.exists("Saves/"):
         print("Loading save files...")
         save_files = os.listdir("Saves/")
@@ -135,17 +138,19 @@ async def on_ready():
         print("First time run? Creating Saves directory...")
         os.makedirs("Saves")
         print("Saves directory created")
-    print("Pissbot Online!")
 
 
 def exit_handler():
     print("Stopping Pissbot...")
     client.loop.stop()
+    print("Saving data...")
     for person in People.values():
+        print("Saving data for user", person.discord_id)
         person.save_to_disk()
     print("Pissbot stopped")
 
 
 print("Starting Pissbot...")
+init_handler()
 atexit.register(exit_handler)
 client.run(TOKEN)
